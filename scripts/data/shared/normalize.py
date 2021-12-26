@@ -45,7 +45,8 @@ class Normalizer:
         os.makedirs(self.output_directory, exist_ok=True)
         fold_names = [self.train_name, self.dev_name, self.test_name]
         for fold in fold_names:
-            self.process_fold(fold)
+            if fold != 'None':
+                self.process_fold(fold)
 
     def process_fold(self, fold):
         fname = f"{self.input_directory}/{fold}.{self.file_extension}"

@@ -1,0 +1,18 @@
+Formatting scierc (command from get_scierc.sh):
+python scripts/data/shared/normalize.py data/scierc/processed_data/json data/scierc/normalized_data/json --file_extension=json --max_tokens_per_doc=0 --dataset=scierc
+
+Formatting scierc (command from get_scierc.sh):
+python scripts/data/shared/collate.py data/scierc/processed_data/json data/scierc/collated_data/json --file_extension=json --dataset=scierc
+
+Prediction on scierc dataset:
+allennlp predict pretrained/scierc.tar.gz data/scierc/normalized_data/json/test.json --predictor dygie --include-package dygie --use-dataset-reader --output-file predictions/scierc-test.jsonl --cuda-device -1 --silent
+
+------------------------------
+Formatting iccbr (command from get_scierc.sh):
+python scripts/data/shared/normalize.py data/iccbr/processed_data/json data/iccbr/normalized_data/json --file_extension=json --max_tokens_per_doc=0 --dataset=scierc --train_name None --dev_name None --test_name iccbr_test_sentences
+
+Formatting iccbr (command from get_scierc.sh):
+python scripts/data/shared/collate.py data/iccbr/processed_data/json data/iccbr/collated_data/json --file_extension=json --dataset=scierc --train_name skip --dev_name skip --test_name iccbr_test_sentences
+
+Prediction on iccbr dataset:
+allennlp predict pretrained/scierc.tar.gz data/iccbr/normalized_data/json/iccbr_test_sentences.json --predictor dygie --include-package dygie --use-dataset-reader --output-file predictions/iccbr_predictions.jsonl --cuda-device -1 --silent
